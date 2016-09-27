@@ -16,7 +16,7 @@
 
 # Test 
 * `GET` - request no longer have 400 test
-* `PUT and POST` - test 400 for bad json
- * `DELETE` - test 404, for a DELETE request with an invalid or missing id
-  * 404 for missing id because `DELETE /api/<simple-resource-name>/` is not a route
- * `DELETE` - test 204, with an empty response body for DELETE request with a valid id
+* `PUT and POST` - test 400 for bad json  
+* `DELETE` - test 404, for a DELETE request with an invalid or missing id
+ * 404 for missing id because `DELETE /api/<simple-resource-name>/` is not a route
+* `DELETE` - test 204, with an empty response body for DELETE request with a valid id
