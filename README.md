@@ -64,3 +64,4 @@
 
 ## Bonus
 * **1pts** a `GET` request to `/api/simple-resource-name` should retrun an array of all of the ids for that resource
+ * if you do the bonus you should not test for a 404 for `GET` request with no query, and instead write a test that ensures your a `GET` to `/api/simple-resouce-name` returns a 200 and an array
