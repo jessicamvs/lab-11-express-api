@@ -54,7 +54,6 @@ exports.updateItem = function(schemaName, id, newTitle, newAuthor) {
     }
   })
   .catch(err => Promise.reject(err));
-
 };
 
 exports.deleteItem = function(schemaName, id) {
@@ -62,14 +61,14 @@ exports.deleteItem = function(schemaName, id) {
   if (!id) return Promise.reject(new Error('expected id'));
 
   if(fs.existsSync(`${__dirname}/../data/${schemaName}/${id}.json`)) {
-    del([`${__dirname}/../data/${schemaName}/${id}.json`])
+    return del([`${__dirname}/../data/${schemaName}/${id}.json`])
     .then(paths => {
       console.log('Deleted files and folders:\n', paths.join('\n'));
+      return Promise.resolve(paths);
     })
     .catch(err => {
       console.error(err);
     });
-    return;
   }
   return Promise.reject(new Error('file path does not exist'));
 };

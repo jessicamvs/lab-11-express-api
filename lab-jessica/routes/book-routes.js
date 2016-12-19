@@ -21,7 +21,6 @@ module.exports = function(router){
       });
       return;
     }
-    res.status(400).send('bad request');
   });
 
   router.post('/api/books', function(req, res) {
@@ -35,7 +34,10 @@ module.exports = function(router){
     }
   });
 
-  // * `PUT` - test 200, response body like  `{<data>}` for a post request with a valid body
+  router.post('/api/books', function(req, res) {
+    res.status(400).send('bad request');
+  });
+
   router.put('/api/books/:id', function(req, res) {
     if(req.params.id) {
       storage.updateItem('book', req.params.id, req.body.title, req.body.author)
@@ -49,16 +51,24 @@ module.exports = function(router){
     }
   });
 
+  router.put('/api/books', function(req, res) {
+    res.status(400).send('bad request');
+  });
+
   router.delete('/api/books/:id', function(req, res) {
     if (req.params.id) {
       storage.deleteItem('book', req.params.id)
       .then(() => {
-        res.status(204);
+        res.status(204).end();
       })
       .catch(err => {
         console.error(err);
-        res.status(404).send('could not delete a file that does not exist');
+        res.status(404).send('not found' + '\n');
       });
     }
+  });
+
+  router.delete('/api/books', function(req, res) {
+    res.status(400).send('bad request');
   });
 };
