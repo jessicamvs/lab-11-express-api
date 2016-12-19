@@ -34,8 +34,8 @@ module.exports = function(router){
       res.status(400).send('bad request');
     }
   });
-  // * `PUT` - test 200, response body like  `{<data>}` for a post request with a valid body
 
+  // * `PUT` - test 200, response body like  `{<data>}` for a post request with a valid body
   router.put('/api/books/:id', function(req, res) {
     if(req.params.id) {
       storage.updateItem('book', req.params.id, req.body.title, req.body.author)
@@ -44,7 +44,7 @@ module.exports = function(router){
       })
       .catch(err => {
         console.error(err);
-        res.status(404).send('not found');
+        res.status(400).send('bad request');
       });
     }
   });
