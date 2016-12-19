@@ -41,7 +41,7 @@ describe('testing book routes', function() {
       });
     });
 
-    it('should respond with 404 error if invalid body is provided', function(done) {
+    it('should respond with 400 error if invalid body is provided', function(done) {
       request.post('localhost:3000/api/books')
       .send('lolololololol')
       .end((err, res) => {
