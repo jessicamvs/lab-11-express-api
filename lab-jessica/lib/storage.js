@@ -34,6 +34,29 @@ exports.fetchItem = function(schemaName, id) {
   .catch(err => Promise.reject(err));
 };
 
+exports.updateItem = function(schemaName, id, newTitle, newAuthor) {
+  if (!schemaName) return Promise.reject(new Error('expected schemaName'));
+  if (!id) return Promise.reject(new Error('expected id'));
+  if (!newTitle) return Promise.reject(new Error('expected newTitle'));
+  if (!newAuthor) return Promise.reject(new Error('expected newAuthor'));
+
+  return fs.readFileProm(`${__dirname}/../data/${schemaName}/${id}.json`)
+  .then(data => {
+    try {
+      let item = JSON.parse(data.toString());
+      item.title = newTitle;
+      item.author = newAuthor;
+      let json = JSON.stringify(item);
+      fs.writeFileProm(`${__dirname}/../data/${schemaName}/${id}.json`, json);
+      return item;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  })
+  .catch(err => Promise.reject(err));
+
+};
+
 exports.deleteItem = function(schemaName, id) {
   if (!schemaName) return Promise.reject(new Error('expected schemaName'));
   if (!id) return Promise.reject(new Error('expected id'));
